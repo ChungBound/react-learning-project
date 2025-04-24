@@ -1,15 +1,26 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import Link from "next/link"
-import { ArrowRight, BookOpen, Code, Zap } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
+import { ArrowRight, BookOpen, Code, Zap } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="container mx-auto">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">React 学习导航</h1>
-          <p className="text-xl text-muted-foreground">从基础到高级的 React 学习资源，帮助你掌握 React 开发</p>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">
+            React 学习导航
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            从基础到高级的 React 学习资源，帮助你掌握 React 开发
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-10">
@@ -97,5 +108,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }
