@@ -10,15 +10,21 @@ function Footer() {
           rel="noopener noreferrer"
           className="group"
         >
-          <div className="flex bg-gray-900/80 items-center bg-white/10 backdrop-blur-md rounded-full py-2 px-6 shadow-lg">
-            <span className="text-gray-200 text-sm font-medium mr-3">
+          <div
+            className="flex items-center rounded-full py-2 px-6 shadow-md bg-gray-900/60 backdrop-blur-md transition-all duration-300 group-hover:bg-gray-900 group-hover:bg-opacity-100 group-hover:backdrop-blur-none group-hover:shadow-lg group-hover:scale-110"
+            style={{
+              boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px 0px,
+                          rgba(0, 0, 0, 0.08) 0px 6px 12px 0px`,
+            }}
+          >
+            <span className="text-gray-200 text-sm font-medium mr-3 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               Created by ChungBound
             </span>
 
             <img
               src="/github-fill.svg"
               alt="GitHub"
-              className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 invert"
+              className="w-5 h-5 transition-transform duration-300 invert"
             />
           </div>
         </a>

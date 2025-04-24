@@ -1,40 +1,51 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import CodeBlock from "@/components/code-block"
-import { useState, useMemo } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import CodeBlock from "@/components/code-block";
+import { useState, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 // 示例组件：计算开销大的操作
 function ExpensiveCalculationExample() {
-  const [count, setCount] = useState(0)
-  const [dark, setDark] = useState(false)
+  const [count, setCount] = useState(0);
+  const [dark, setDark] = useState(false);
 
   // 使用 useMemo 缓存计算结果
   const expensiveResult = useMemo(() => {
-    console.log("执行昂贵计算...")
+    console.log("执行昂贵计算...");
     // 模拟耗时操作
-    let result = 0
+    let result = 0;
     for (let i = 0; i < 1000000000; i++) {
-      result += 1
+      result += 1;
     }
-    return count * 2
-  }, [count]) // 只有 count 变化时才重新计算
+    return count * 2;
+  }, [count]); // 只有 count 变化时才重新计算
 
   const theme = {
     backgroundColor: dark ? "#333" : "#fff",
     color: dark ? "#fff" : "#333",
-  }
+  };
 
   return (
     <Card className="p-4 border-dashed">
       <div className="space-y-4" style={theme}>
         <h3 className="text-lg font-medium">昂贵计算示例</h3>
-        <p className="text-sm text-muted-foreground">打开控制台查看计算何时执行</p>
+        <p className="text-sm text-muted-foreground">
+          打开控制台查看计算何时执行
+        </p>
 
-        <div className="p-4 rounded-md" style={{ backgroundColor: dark ? "#444" : "#f0f0f0" }}>
+        <div
+          className="p-4 rounded-md"
+          style={{ backgroundColor: dark ? "#444" : "#f0f0f0" }}
+        >
           <p>计数: {count}</p>
           <p>计算结果 (count × 2): {expensiveResult}</p>
         </div>
@@ -45,36 +56,39 @@ function ExpensiveCalculationExample() {
             切换主题
           </Button>
         </div>
-        <p className="text-sm text-muted-foreground">注意：点击"增加计数"会触发重新计算，而点击"切换主题"不会。</p>
+        <p className="text-sm text-muted-foreground">
+          注意：点击"增加计数"会触发重新计算，而点击"切换主题"不会。
+        </p>
       </div>
     </Card>
-  )
+  );
 }
 
 // 示例组件：引用相等性
 function ReferenceEqualityExample() {
-  const [name, setName] = useState("")
-  const [age, setAge] = useState(25)
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(25);
+  const [count, setCount] = useState(0);
 
   // 不使用 useMemo - 每次渲染都会创建新对象
-  const userWithoutMemo = { name, age }
+  const userWithoutMemo = { name, age };
 
   // 使用 useMemo - 只有 name 或 age 变化时才创建新对象
-  const userWithMemo = useMemo(() => ({ name, age }), [name, age])
+  const userWithMemo = useMemo(() => ({ name, age }), [name, age]);
 
   // 检查引用是否变化
-  const [prevUserWithoutMemo, setPrevUserWithoutMemo] = useState(userWithoutMemo)
-  const [prevUserWithMemo, setPrevUserWithMemo] = useState(userWithMemo)
+  const [prevUserWithoutMemo, setPrevUserWithoutMemo] =
+    useState(userWithoutMemo);
+  const [prevUserWithMemo, setPrevUserWithMemo] = useState(userWithMemo);
 
-  const referenceChangedWithoutMemo = prevUserWithoutMemo !== userWithoutMemo
-  const referenceChangedWithMemo = prevUserWithMemo !== userWithMemo
+  const referenceChangedWithoutMemo = prevUserWithoutMemo !== userWithoutMemo;
+  const referenceChangedWithMemo = prevUserWithMemo !== userWithMemo;
 
   // 更新前一个引用
   useMemo(() => {
-    setPrevUserWithoutMemo(userWithoutMemo)
-    setPrevUserWithMemo(userWithMemo)
-  }, [userWithoutMemo, userWithMemo])
+    setPrevUserWithoutMemo(userWithoutMemo);
+    setPrevUserWithMemo(userWithMemo);
+  }, [userWithoutMemo, userWithMemo]);
 
   return (
     <Card className="p-4 border-dashed">
@@ -83,7 +97,12 @@ function ReferenceEqualityExample() {
 
         <div className="space-y-2">
           <div className="flex gap-2 items-center">
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="输入名称" className="max-w-xs" />
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="输入名称"
+              className="max-w-xs"
+            />
             <Button variant="outline" onClick={() => setAge(age + 1)}>
               增加年龄
             </Button>
@@ -101,19 +120,27 @@ function ReferenceEqualityExample() {
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div className="p-4 border rounded-md">
               <h4 className="font-medium mb-2">不使用 useMemo</h4>
-              <p className="text-sm">引用是否变化: {referenceChangedWithoutMemo ? "是" : "否"}</p>
-              <p className="text-sm text-muted-foreground mt-1">每次渲染都会创建新对象，即使只改变计数。</p>
+              <p className="text-sm">
+                引用是否变化: {referenceChangedWithoutMemo ? "是" : "否"}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                每次渲染都会创建新对象，即使只改变计数。
+              </p>
             </div>
             <div className="p-4 border rounded-md">
               <h4 className="font-medium mb-2">使用 useMemo</h4>
-              <p className="text-sm">引用是否变化: {referenceChangedWithMemo ? "是" : "否"}</p>
-              <p className="text-sm text-muted-foreground mt-1">只有当名称或年龄变化时才会创建新对象。</p>
+              <p className="text-sm">
+                引用是否变化: {referenceChangedWithMemo ? "是" : "否"}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                只有当名称或年龄变化时才会创建新对象。
+              </p>
             </div>
           </div>
         </div>
       </div>
     </Card>
-  )
+  );
 }
 
 export default function UseMemoPage() {
@@ -125,12 +152,16 @@ export default function UseMemoPage() {
         <Card>
           <CardHeader>
             <CardTitle>什么是 useMemo？</CardTitle>
-            <CardDescription>useMemo 是 React 的一个内置钩子，用于记忆计算结果。</CardDescription>
+            <CardDescription>
+              useMemo 是 React 的一个内置钩子，用于记忆计算结果。
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              <code>useMemo</code> 是一个用于性能优化的 React 钩子，它可以"记忆"（缓存）计算结果，避免在每次渲染时重新计算。
-              当依赖项没有变化时，<code>useMemo</code> 会返回上一次计算的结果，而不是重新执行计算函数。
+              <code>useMemo</code> 是一个用于性能优化的 React
+              钩子，它可以"记忆"（缓存）计算结果，避免在每次渲染时重新计算。
+              当依赖项没有变化时，<code>useMemo</code>{" "}
+              会返回上一次计算的结果，而不是重新执行计算函数。
             </p>
             <CodeBlock language="tsx">{`import { useMemo } from 'react';
 
@@ -140,7 +171,8 @@ const memoizedValue = useMemo(() => {
   return computeExpensiveValue(a, b);
 }, [a, b]); // 依赖项数组`}</CodeBlock>
             <p className="mt-4">
-              <code>useMemo</code> 接收两个参数：一个创建函数和一个依赖项数组。创建函数会在渲染期间执行，但只有当依赖项变化时才会重新执行。
+              <code>useMemo</code>{" "}
+              接收两个参数：一个创建函数和一个依赖项数组。创建函数会在渲染期间执行，但只有当依赖项变化时才会重新执行。
             </p>
           </CardContent>
         </Card>
@@ -151,12 +183,15 @@ const memoizedValue = useMemo(() => {
             <CardDescription>了解 useMemo 的使用场景和好处。</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="mb-4">使用 <code>useMemo</code> 主要有两个原因：</p>
+            <p className="mb-4">
+              使用 <code>useMemo</code> 主要有两个原因：
+            </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-md p-4">
                 <h3 className="text-lg font-medium mb-2">1. 避免昂贵的计算</h3>
                 <p>
-                  当计算过程很耗时时，<code>useMemo</code> 可以避免在每次渲染时都重新计算。只有当依赖项变化时，才会重新执行计算。
+                  当计算过程很耗时时，<code>useMemo</code>{" "}
+                  可以避免在每次渲染时都重新计算。只有当依赖项变化时，才会重新执行计算。
                 </p>
                 <CodeBlock language="tsx" className="mt-2">{`// 避免昂贵的计算
 const memoizedResult = useMemo(() => {
@@ -168,7 +203,8 @@ const memoizedResult = useMemo(() => {
               <div className="border rounded-md p-4">
                 <h3 className="text-lg font-medium mb-2">2. 保持引用相等性</h3>
                 <p>
-                  <code>useMemo</code> 可以用来缓存对象或数组的引用，避免在每次渲染时创建新的引用，这对于避免不必要的重新渲染很有用。
+                  <code>useMemo</code>{" "}
+                  可以用来缓存对象或数组的引用，避免在每次渲染时创建新的引用，这对于避免不必要的重新渲染很有用。
                 </p>
                 <CodeBlock language="tsx" className="mt-2">{`// 保持引用相等性
 const memoizedObject = useMemo(() => {
@@ -185,15 +221,25 @@ const memoizedObject = useMemo(() => {
             <CardDescription>何时应该使用 useMemo。</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="mb-4">以下是一些适合使用 <code>useMemo</code> 的场景：</p>
+            <p className="mb-4">
+              以下是一些适合使用 <code>useMemo</code> 的场景：
+            </p>
             <ul className="list-disc list-inside space-y-1 mb-4">
               <li>计算开销大的操作（如复杂的数据转换、排序、过滤等）</li>
-              <li>需要保持引用相等性的对象或数组（如传递给子组件的 props 或依赖项）</li>
-              <li>作为其他 Hook 的依赖项（如 <code>useEffect</code>、<code>useCallback</code> 等）</li>
+              <li>
+                需要保持引用相等性的对象或数组（如传递给子组件的 props
+                或依赖项）
+              </li>
+              <li>
+                作为其他 Hook 的依赖项（如 <code>useEffect</code>、
+                <code>useCallback</code> 等）
+              </li>
               <li>需要避免重复创建的复杂对象（如图表配置、样式对象等）</li>
             </ul>
             <p className="mb-4">
-              但请记住，<code>useMemo</code> 本身也有成本。对于简单的计算或很少变化的值，使用 <code>useMemo</code> 可能不会带来明显的性能提升。
+              但请记住，<code>useMemo</code>{" "}
+              本身也有成本。对于简单的计算或很少变化的值，使用{" "}
+              <code>useMemo</code> 可能不会带来明显的性能提升。
             </p>
           </CardContent>
         </Card>
@@ -245,7 +291,9 @@ function ExpensiveCalculation() {
 }`}</CodeBlock>
 
                 <div className="mt-6 border-t pt-4">
-                  <h4 className="text-sm font-medium text-muted-foreground mb-2">实时示例：</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                    实时示例：
+                  </h4>
                   <ExpensiveCalculationExample />
                 </div>
               </TabsContent>
@@ -296,7 +344,9 @@ function ReferenceEquality() {
 }`}</CodeBlock>
 
                 <div className="mt-6 border-t pt-4">
-                  <h4 className="text-sm font-medium text-muted-foreground mb-2">实时示例：</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                    实时示例：
+                  </h4>
                   <ReferenceEqualityExample />
                 </div>
               </TabsContent>
@@ -381,11 +431,14 @@ function DerivedState() {
         <Card>
           <CardHeader>
             <CardTitle>useMemo vs useCallback</CardTitle>
-            <CardDescription>了解 useMemo 和 useCallback 的区别。</CardDescription>
+            <CardDescription>
+              了解 useMemo 和 useCallback 的区别。
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              <code>useMemo</code> 和 <code>useCallback</code> 都是用于性能优化的 React 钩子，但它们有不同的用途：
+              <code>useMemo</code> 和 <code>useCallback</code>{" "}
+              都是用于性能优化的 React 钩子，但它们有不同的用途：
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-md p-4">
@@ -414,8 +467,10 @@ const memoizedCallback = useCallback(() => {
               </div>
             </div>
             <p className="mt-4">
-              实际上，<code>useCallback(fn, deps)</code> 相当于 <code>useMemo(() =&gt; fn, deps)</code>。
-              两者的区别在于 <code>useMemo</code> 可以记忆任何值，而 <code>useCallback</code> 专门用于记忆函数。
+              实际上，<code>useCallback(fn, deps)</code> 相当于{" "}
+              <code>useMemo(() =&gt; fn, deps)</code>。 两者的区别在于{" "}
+              <code>useMemo</code> 可以记忆任何值，而 <code>useCallback</code>{" "}
+              专门用于记忆函数。
             </p>
           </CardContent>
         </Card>
@@ -427,7 +482,9 @@ const memoizedCallback = useCallback(() => {
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              虽然 <code>useMemo</code> 可以提高性能，但它并不是万能的。以下是一些使用 <code>useMemo</code> 的注意事项：
+              虽然 <code>useMemo</code>{" "}
+              可以提高性能，但它并不是万能的。以下是一些使用{" "}
+              <code>useMemo</code> 的注意事项：
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-md p-4">
@@ -436,5 +493,13 @@ const memoizedCallback = useCallback(() => {
                   <li>计算开销大（如复杂的数据处理）</li>
                   <li>需要保持引用相等性以避免不必要的重新渲染</li>
                   <li>作为其他 Hook 的依赖项</li>
-                  <li>计算结
-\`\`\`\
+                  <li>计算结果需要在多次渲染中保持一致</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
