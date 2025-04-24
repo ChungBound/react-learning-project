@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CodeBlock from "@/components/code-block";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -23,7 +23,7 @@ function ExpensiveCalculationExample() {
     console.log("执行昂贵计算...");
     // 模拟耗时操作
     let result = 0;
-    for (let i = 0; i < 1000000000; i++) {
+    for (let i = 0; i < 1000000; i++) {
       result += 1;
     }
     return count * 2;
@@ -85,7 +85,7 @@ function ReferenceEqualityExample() {
   const referenceChangedWithMemo = prevUserWithMemo !== userWithMemo;
 
   // 更新前一个引用
-  useMemo(() => {
+  useEffect(() => {
     setPrevUserWithoutMemo(userWithoutMemo);
     setPrevUserWithMemo(userWithMemo);
   }, [userWithoutMemo, userWithMemo]);
@@ -136,6 +136,84 @@ function ReferenceEqualityExample() {
                 只有当名称或年龄变化时才会创建新对象。
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+// 示例组件：派生状态
+function DerivedStateExample() {
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
+  const [filter, setFilter] = useState("all");
+
+  // 使用 useMemo 计算派生状态
+  const filteredNumbers = useMemo(() => {
+    console.log("过滤数字...");
+
+    if (filter === "all") {
+      return numbers;
+    } else if (filter === "even") {
+      return numbers.filter((n) => n % 2 === 0);
+    } else if (filter === "odd") {
+      return numbers.filter((n) => n % 2 !== 0);
+    }
+
+    return numbers;
+  }, [numbers, filter]); // 依赖于 numbers 和 filter
+
+  // 使用 useMemo 计算统计信息
+  const stats = useMemo(() => {
+    console.log("计算统计信息...");
+
+    return {
+      count: filteredNumbers.length,
+      sum: filteredNumbers.reduce((a, b) => a + b, 0),
+      average:
+        filteredNumbers.length > 0
+          ? filteredNumbers.reduce((a, b) => a + b, 0) / filteredNumbers.length
+          : 0,
+    };
+  }, [filteredNumbers]); // 依赖于 filteredNumbers
+
+  const addNumber = () => {
+    const newNumber = Math.floor(Math.random() * 100) + 1;
+    setNumbers([...numbers, newNumber]);
+  };
+
+  return (
+    <Card className="p-4 border-dashed">
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium">派生状态示例</h3>
+
+        <div className="flex gap-2">
+          <Button onClick={addNumber}>添加随机数</Button>
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="px-2 py-1 border rounded-md"
+          >
+            <option value="all">全部</option>
+            <option value="even">偶数</option>
+            <option value="odd">奇数</option>
+          </select>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="p-4 border rounded-md">
+            <h4 className="font-medium mb-2">数字列表</h4>
+            <ul className="list-disc list-inside">
+              {filteredNumbers.map((num, index) => (
+                <li key={index}>{num}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="p-4 border rounded-md">
+            <h4 className="font-medium mb-2">统计信息</h4>
+            <p>数量: {stats.count}</p>
+            <p>总和: {stats.sum}</p>
+            <p>平均值: {stats.average.toFixed(2)}</p>
           </div>
         </div>
       </div>
@@ -423,6 +501,13 @@ function DerivedState() {
     </div>
   );
 }`}</CodeBlock>
+
+                <div className="mt-6 border-t pt-4">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                    实时示例：
+                  </h4>
+                  <DerivedStateExample />
+                </div>
               </TabsContent>
             </Tabs>
           </CardContent>
@@ -493,10 +578,124 @@ const memoizedCallback = useCallback(() => {
                   <li>计算开销大（如复杂的数据处理）</li>
                   <li>需要保持引用相等性以避免不必要的重新渲染</li>
                   <li>作为其他 Hook 的依赖项</li>
-                  <li>计算结果需要在多次渲染中保持一致</li>
+                  <li>计算结果被多次使用</li>
+                </ul>
+              </div>
+              <div className="border rounded-md p-4">
+                <h3 className="text-lg font-medium mb-2">何时不使用 useMemo</h3>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>计算开销小（如简单的数学运算）</li>
+                  <li>值很少变化</li>
+                  <li>不作为其他 Hook 的依赖项</li>
+                  <li>不关心引用相等性</li>
                 </ul>
               </div>
             </div>
+            <p className="mt-4">
+              记住，<code>useMemo</code>{" "}
+              本身也有成本。它会增加代码复杂性，并占用内存来存储记忆化的值。在某些情况下，过度使用{" "}
+              <code>useMemo</code> 可能会导致性能下降而不是提升。
+            </p>
+            <CodeBlock
+              language="tsx"
+              className="mt-4"
+            >{`// 不需要 useMemo 的例子
+function Component({ value }) {
+  // 不需要 useMemo，计算开销小
+  const doubled = value * 2;
+  
+  // 不需要 useMemo，不关心引用相等性
+  const style = { color: 'red' };
+  
+  return <div style={style}>{doubled}</div>;
+}
+
+// 需要 useMemo 的例子
+function Component({ items, filter }) {
+  // 需要 useMemo，计算开销大
+  const filteredItems = useMemo(() => {
+    console.log('过滤项目...');
+    return items.filter(item => item.includes(filter));
+  }, [items, filter]);
+  
+  // 需要 useMemo，关心引用相等性
+  const options = useMemo(() => {
+    return { items: filteredItems, count: filteredItems.length };
+  }, [filteredItems]);
+  
+  return <ChildComponent options={options} />;
+}`}</CodeBlock>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>最佳实践</CardTitle>
+            <CardDescription>使用 useMemo 的一些最佳实践。</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc list-inside space-y-3">
+              <li>
+                <strong>不要过早优化</strong>：只有在确实遇到性能问题时才使用{" "}
+                <code>useMemo</code>。
+              </li>
+              <li>
+                <strong>正确指定依赖项</strong>
+                ：确保依赖项数组包含所有在计算函数中使用的外部变量。
+              </li>
+              <li>
+                <strong>避免在 useMemo 中执行副作用</strong>：
+                <code>useMemo</code> 应该是纯函数，不应该有副作用。
+              </li>
+              <li>
+                <strong>考虑使用 React.memo</strong>
+                ：对于组件级别的记忆化，考虑使用 <code>React.memo</code>{" "}
+                而不是在组件内部使用多个 <code>useMemo</code>。
+              </li>
+              <li>
+                <strong>使用 DevTools 分析性能</strong>：使用 React DevTools
+                Profiler 来确定是否需要使用 <code>useMemo</code>{" "}
+                以及它是否带来了性能提升。
+              </li>
+            </ul>
+            <CodeBlock
+              language="tsx"
+              className="mt-4"
+            >{`// 使用 React.memo 记忆化组件
+import { memo, useMemo } from 'react';
+
+// 记忆化组件
+const MemoizedComponent = memo(function Component({ items, onItemClick }) {
+  // 组件内部仍然可以使用 useMemo
+  const processedItems = useMemo(() => {
+    return items.map(item => ({
+      ...item,
+      processed: true
+    }));
+  }, [items]);
+  
+  return (
+    <div>
+      {processedItems.map(item => (
+        <div key={item.id} onClick={() => onItemClick(item)}>
+          {item.name}
+        </div>
+      ))}
+    </div>
+  );
+});
+
+// 父组件
+function ParentComponent() {
+  // ...
+  
+  // 使用 useCallback 记忆化回调函数
+  const handleItemClick = useCallback((item) => {
+    console.log('Item clicked:', item);
+  }, []);
+  
+  return <MemoizedComponent items={items} onItemClick={handleItemClick} />;
+}`}</CodeBlock>
           </CardContent>
         </Card>
       </div>

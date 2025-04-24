@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   ChevronDown,
   ChevronRight,
@@ -18,23 +18,23 @@ import {
   Zap,
   Rocket,
   Gauge,
-} from "lucide-react"
+} from "lucide-react";
 
 interface NavItem {
-  title: string
-  href: string
-  icon?: React.ReactNode
+  title: string;
+  href: string;
+  icon?: React.ReactNode;
 }
 
 interface NavSection {
-  title: string
-  icon: React.ReactNode
-  items: NavItem[]
-  expanded?: boolean
+  title: string;
+  icon: React.ReactNode;
+  items: NavItem[];
+  expanded?: boolean;
 }
 
 export default function Sidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [sections, setSections] = useState<NavSection[]>([
     {
       title: "React 基础",
@@ -104,7 +104,7 @@ export default function Sidebar() {
       icon: <Gauge className="h-4 w-4" />,
       expanded: false,
       items: [
-        { title: "React.memo", href: "/performance/react-memo" },
+        { title: "React.memo", href: "/performance/memo" },
         { title: "列表优化", href: "/performance/list-optimization" },
         { title: "懒加载", href: "/performance/lazy-loading" },
       ],
@@ -119,13 +119,15 @@ export default function Sidebar() {
         { title: "表单处理", href: "/examples/forms" },
       ],
     },
-  ])
+  ]);
 
   const toggleSection = (index: number) => {
     setSections((prev) =>
-      prev.map((section, i) => (i === index ? { ...section, expanded: !section.expanded } : section)),
-    )
-  }
+      prev.map((section, i) =>
+        i === index ? { ...section, expanded: !section.expanded } : section
+      )
+    );
+  };
 
   return (
     <div className="w-64 border-r bg-background h-screen overflow-y-auto hidden md:block">
@@ -134,7 +136,11 @@ export default function Sidebar() {
         <nav className="space-y-1">
           {sections.map((section, index) => (
             <div key={section.title} className="mb-2">
-              <Button variant="ghost" className="w-full justify-start p-2 mb-1" onClick={() => toggleSection(index)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start p-2 mb-1"
+                onClick={() => toggleSection(index)}
+              >
                 {section.icon}
                 <span className="ml-2">{section.title}</span>
                 {section.expanded ? (
@@ -153,7 +159,7 @@ export default function Sidebar() {
                         "block py-1.5 px-3 text-sm rounded-md",
                         pathname === item.href
                           ? "bg-primary/10 text-primary font-medium"
-                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                       )}
                     >
                       {item.title}
@@ -166,5 +172,5 @@ export default function Sidebar() {
         </nav>
       </div>
     </div>
-  )
+  );
 }
