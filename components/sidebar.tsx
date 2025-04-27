@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   ChevronDown,
   ChevronRight,
@@ -39,7 +40,7 @@ export default function Sidebar() {
     {
       title: "React 基础",
       icon: <Home className="h-4 w-4" />,
-      expanded: true,
+      expanded: false,
       items: [
         { title: "JSX 语法", href: "/basics/jsx" },
         { title: "组件基础", href: "/basics/components" },
@@ -122,17 +123,25 @@ export default function Sidebar() {
   ]);
 
   const toggleSection = (index: number) => {
-    setSections((prev) =>
-      prev.map((section, i) =>
-        i === index ? { ...section, expanded: !section.expanded } : section
-      )
+    setSections((prevSections) =>
+      prevSections.map((section, i) => ({
+        ...section,
+        expanded: i === index ? !section.expanded : false,
+      }))
     );
   };
 
   return (
     <div className="w-64 border-r bg-background h-screen overflow-y-auto hidden md:block">
       <div className="p-4">
-        <h1 className="text-xl font-bold mb-4">React 学习导航</h1>
+        <div className="flex items-center justify-between mb-4">
+          <Link href="/">
+            <h1 className="text-xl font-bold hover:text-primary cursor-pointer transition-colors">
+              React 学习导航
+            </h1>
+          </Link>
+          <ThemeToggle />
+        </div>
         <nav className="space-y-1">
           {sections.map((section, index) => (
             <div key={section.title} className="mb-2">

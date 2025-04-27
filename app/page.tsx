@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,7 +12,7 @@ import {
 import Link from "next/link";
 import { ArrowRight, BookOpen, Code, Zap } from "lucide-react";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="container mx-auto">
       <div className="max-w-4xl mx-auto">
