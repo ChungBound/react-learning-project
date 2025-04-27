@@ -1,12 +1,12 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Sidebar from "@/components/sidebar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "React 学习导航",
@@ -25,7 +25,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
 
-      <body className={inter.className}>
+      {/* <body className={inter.className}> */}
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

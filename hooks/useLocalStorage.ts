@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 
 export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
@@ -5,7 +6,15 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      if (item === null) {
+        return initialValue;
+      }
+      // 尝试解析 JSON，如果失败则返回原始值
+      try {
+        return JSON.parse(item);
+      } catch {
+        return item as T;
+      }
     } catch (error) {
       console.error(error);
       return initialValue;
@@ -18,7 +27,11 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
       // 允许值是一个函数，这样我们就有了和useState一样的API
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      // 根据值的类型决定是否使用 JSON.stringify
+      const valueToStoreInLocalStorage = typeof valueToStore === 'string' 
+        ? valueToStore 
+        : JSON.stringify(valueToStore);
+      window.localStorage.setItem(key, valueToStoreInLocalStorage);
     } catch (error) {
       console.error(error);
     }

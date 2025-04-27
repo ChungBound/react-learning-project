@@ -1,17 +1,22 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
 interface WindowSize {
-  width: number;
-  height: number;
+  width: number | undefined;
+  height: number | undefined;
 }
 
 export function useWindowSize(): WindowSize {
   const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: undefined,
+    height: undefined,
   });
 
   useEffect(() => {
+    // 只在客户端执行
+    if (typeof window === "undefined") return;
+
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
@@ -27,7 +32,7 @@ export function useWindowSize(): WindowSize {
 
     // 清理函数
     return () => window.removeEventListener("resize", handleResize);
-  }, []); // 空依赖数组意味着这个effect只会在组件挂载和卸载时运行
+  }, []);
 
   return windowSize;
 } 

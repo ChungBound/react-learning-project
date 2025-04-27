@@ -34,12 +34,37 @@ function LocalStorageExample() {
 
 // 示例组件：使用 useWindowSize
 function WindowSizeExample() {
+  const [mounted, setMounted] = useState(false);
   const { width, height } = useWindowSize();
+  const isMobile = width ? width < 768 : false;
+  const isTablet = width ? width >= 768 && width < 1024 : false;
+  const isDesktop = width ? width >= 1024 : false;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div>加载中...</div>;
+  }
 
   return (
     <div>
       <p>窗口宽度: {width}px</p>
       <p>窗口高度: {height}px</p>
+      {width && (
+        <div className="mt-2">
+          {isMobile && (
+            <p className="text-sm text-muted-foreground">当前是移动设备视图</p>
+          )}
+          {isTablet && (
+            <p className="text-sm text-muted-foreground">当前是平板设备视图</p>
+          )}
+          {isDesktop && (
+            <p className="text-sm text-muted-foreground">当前是桌面设备视图</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -123,9 +148,9 @@ export default function CustomHooksPage() {
 
   // useWindowSize 示例
   const { width, height } = useWindowSize();
-  const isMobile = width < 768;
-  const isTablet = width >= 768 && width < 1024;
-  const isDesktop = width >= 1024;
+  const isMobile = width ? width < 768 : false;
+  const isTablet = width ? width >= 768 && width < 1024 : false;
+  const isDesktop = width ? width >= 1024 : false;
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -413,10 +438,12 @@ function ResponsiveComponent() {
     <div>
       <p>窗口宽度: {size.width}px</p>
       <p>窗口高度: {size.height}px</p>
-      {size.width < 768 ? (
-        <p>当前是移动设备视图</p>
-      ) : (
-        <p>当前是桌面视图</p>
+      {size.width && (
+        <div>
+          {isMobile && <p>移动设备</p>}
+          {isTablet && <p>平板设备</p>}
+          {isDesktop && <p>桌面设备</p>}
+        </div>
       )}
     </div>
   );
