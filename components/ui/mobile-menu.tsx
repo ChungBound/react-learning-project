@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -11,9 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import Sidebar from "@/components/sidebar";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function MobileMenu() {
+  const t = useTranslations("nav");
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -28,14 +29,6 @@ export function MobileMenu() {
           包含所有导航链接的侧边栏菜单
         </SheetDescription>
         <div className="h-full flex flex-col">
-          {/* <div className="flex items-center p-4 border-b">
-            <Link
-              href="/"
-              className="text-lg font-semibold hover:text-primary transition-colors"
-            >
-              React 学习导航
-            </Link>
-          </div> */}
           <div className="flex-1 overflow-y-auto">
             <Sidebar />
           </div>

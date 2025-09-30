@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,7 @@ import {
   Rocket,
   Gauge,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface NavItem {
   title: string;
@@ -32,99 +33,122 @@ interface NavSection {
   expanded?: boolean;
 }
 
-const initialSections: NavSection[] = [
-  {
-    title: "React 基础",
-    icon: <Home className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "JSX 语法", href: "/basics/jsx" },
-      { title: "组件基础", href: "/basics/components" },
-      { title: "Props 属性", href: "/basics/props" },
-    ],
-  },
-  {
-    title: "状态管理",
-    icon: <Code className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "useState 钩子", href: "/state/use-state" },
-      { title: "useReducer 钩子", href: "/state/use-reducer" },
-      { title: "状态提升", href: "/state/lifting-state" },
-    ],
-  },
-  {
-    title: "组件通信",
-    icon: <MessageSquare className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "父传子 (Props)", href: "/communication/parent-to-child" },
-      { title: "子传父 (回调函数)", href: "/communication/child-to-parent" },
-      { title: "兄弟组件通信", href: "/communication/sibling" },
-      { title: "跨层级通信 (Context)", href: "/communication/context" },
-    ],
-  },
-  {
-    title: "生命周期与副作用",
-    icon: <LifeBuoy className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "useEffect 基础", href: "/effects/use-effect-basics" },
-      { title: "依赖数组", href: "/effects/dependency-array" },
-      { title: "清理副作用", href: "/effects/cleanup" },
-    ],
-  },
-  {
-    title: "Hooks 进阶",
-    icon: <Layers className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "useMemo", href: "/hooks/use-memo" },
-      { title: "useCallback", href: "/hooks/use-callback" },
-      { title: "useRef", href: "/hooks/use-ref" },
-      { title: "自定义 Hooks", href: "/hooks/custom-hooks" },
-    ],
-  },
-  {
-    title: "高级模式",
-    icon: <Zap className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "高阶组件 (HOC)", href: "/advanced/hoc" },
-      { title: "Render Props", href: "/advanced/render-props" },
-      { title: "组合组件", href: "/advanced/compound-components" },
-      { title: "Context + useReducer", href: "/advanced/context-reducer" },
-    ],
-  },
-  {
-    title: "性能优化",
-    icon: <Gauge className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "React.memo", href: "/performance/memo" },
-      { title: "列表优化", href: "/performance/list-optimization" },
-      { title: "懒加载", href: "/performance/lazy-loading" },
-    ],
-  },
-  {
-    title: "实战案例",
-    icon: <Rocket className="h-4 w-4" />,
-    expanded: false,
-    items: [
-      { title: "待办事项应用", href: "/examples/todo-app" },
-      { title: "数据获取与展示", href: "/examples/data-fetching" },
-      { title: "表单处理", href: "/examples/forms" },
-      { title: "笔记应用", href: "/examples/notes" },
-    ],
-  },
-];
-
 export default function Sidebar() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
-  const [sections, setSections] = useState<NavSection[]>(initialSections);
+
+  const sections: NavSection[] = [
+    {
+      title: t("basics.title"),
+      icon: <Home className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("basics.jsx"), href: "/basics/jsx" },
+        { title: t("basics.components"), href: "/basics/components" },
+        { title: t("basics.props"), href: "/basics/props" },
+      ],
+    },
+    {
+      title: t("state.title"),
+      icon: <Code className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("state.useState"), href: "/state/use-state" },
+        { title: t("state.useReducer"), href: "/state/use-reducer" },
+        { title: t("state.liftingState"), href: "/state/lifting-state" },
+      ],
+    },
+    {
+      title: t("communication.title"),
+      icon: <MessageSquare className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        {
+          title: t("communication.parentToChild"),
+          href: "/communication/parent-to-child",
+        },
+        {
+          title: t("communication.childToParent"),
+          href: "/communication/child-to-parent",
+        },
+        { title: t("communication.sibling"), href: "/communication/sibling" },
+        { title: t("communication.context"), href: "/communication/context" },
+      ],
+    },
+    {
+      title: t("effects.title"),
+      icon: <LifeBuoy className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("effects.useEffect"), href: "/effects/use-effect-basics" },
+        {
+          title: t("effects.dependencyArray"),
+          href: "/effects/dependency-array",
+        },
+        { title: t("effects.cleanup"), href: "/effects/cleanup" },
+      ],
+    },
+    {
+      title: t("hooks.title"),
+      icon: <Layers className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("hooks.useMemo"), href: "/hooks/use-memo" },
+        { title: t("hooks.useCallback"), href: "/hooks/use-callback" },
+        { title: t("hooks.useRef"), href: "/hooks/use-ref" },
+        { title: t("hooks.customHooks"), href: "/hooks/custom-hooks" },
+      ],
+    },
+    {
+      title: t("advanced.title"),
+      icon: <Zap className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("advanced.hoc"), href: "/advanced/hoc" },
+        { title: t("advanced.renderProps"), href: "/advanced/render-props" },
+        {
+          title: t("advanced.compoundComponents"),
+          href: "/advanced/compound-components",
+        },
+        {
+          title: t("advanced.contextReducer"),
+          href: "/advanced/context-reducer",
+        },
+      ],
+    },
+    {
+      title: t("performance.title"),
+      icon: <Gauge className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("performance.memo"), href: "/performance/memo" },
+        {
+          title: t("performance.listOptimization"),
+          href: "/performance/list-optimization",
+        },
+        {
+          title: t("performance.lazyLoading"),
+          href: "/performance/lazy-loading",
+        },
+      ],
+    },
+    {
+      title: t("examples.title"),
+      icon: <Rocket className="h-4 w-4" />,
+      expanded: false,
+      items: [
+        { title: t("examples.todoApp"), href: "/examples/todo-app" },
+        { title: t("examples.dataFetching"), href: "/examples/data-fetching" },
+        { title: t("examples.forms"), href: "/examples/forms" },
+        { title: t("examples.notes"), href: "/examples/notes" },
+      ],
+    },
+  ];
+
+  const [sectionsState, setSectionsState] = useState<NavSection[]>(sections);
 
   const toggleSection = (index: number) => {
-    setSections((prevSections) =>
+    setSectionsState((prevSections) =>
       prevSections.map((section, i) => ({
         ...section,
         expanded: i === index ? !section.expanded : false,
@@ -137,12 +161,12 @@ export default function Sidebar() {
       <div className="p-4 border-b pr-12">
         <Link href="/">
           <h1 className="text-xl font-bold hover:text-primary cursor-pointer transition-colors">
-            React 学习导航
+            {t("title")}
           </h1>
         </Link>
       </div>
       <nav className="flex-1 overflow-y-auto p-4">
-        {sections.map((section, index) => (
+        {sectionsState.map((section, index) => (
           <div key={section.title} className="mb-2">
             <Button
               variant="ghost"
