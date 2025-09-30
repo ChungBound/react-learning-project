@@ -1,0 +1,304 @@
+{
+  "nav": {
+    "title": "React Learning Guide",
+    "basics": {
+      "title": "React Basics",
+      "jsx": "JSX Syntax",
+      "components": "Component Basics",
+      "props": "Props"
+    },
+    "state": {
+      "title": "State Management",
+      "useState": "useState Hook",
+      "useReducer": "useReducer Hook",
+      "liftingState": "Lifting State Up"
+    },
+    "communication": {
+      "title": "Component Communication",
+      "parentToChild": "Parent to Child (Props)",
+      "childToParent": "Child to Parent (Callbacks)",
+      "sibling": "Sibling Communication",
+      "context": "Cross-level (Context)"
+    },
+    "effects": {
+      "title": "Lifecycle & Side Effects",
+      "useEffect": "useEffect Basics",
+      "dependencyArray": "Dependency Array",
+      "cleanup": "Cleanup Effects"
+    },
+    "hooks": {
+      "title": "Advanced Hooks",
+      "useMemo": "useMemo",
+      "useCallback": "useCallback",
+      "useRef": "useRef",
+      "customHooks": "Custom Hooks"
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "hoc": "Higher-Order Components",
+      "renderProps": "Render Props",
+      "compoundComponents": "Compound Components",
+      "contextReducer": "Context + useReducer"
+    },
+    "performance": {
+      "title": "Performance Optimization",
+      "memo": "React.memo",
+      "listOptimization": "List Optimization",
+      "lazyLoading": "Lazy Loading"
+    },
+    "examples": {
+      "title": "Practical Examples",
+      "todoApp": "Todo Application",
+      "dataFetching": "Data Fetching & Display",
+      "forms": "Form Handling",
+      "notes": "Notes Application"
+    }
+  },
+  "home": {
+    "title": "React Learning Guide",
+    "subtitle": "From basics to advanced React learning resources to help you master React development",
+    "basics": {
+      "title": "Fundamentals",
+      "description": "Core concepts and basic usage of React",
+      "items": {
+        "jsx": "JSX syntax and expressions",
+        "components": "Creating and using components",
+        "props": "Props data passing"
+      },
+      "button": "Start Learning"
+    },
+    "communication": {
+      "title": "Component Communication",
+      "description": "Various ways to pass data between components",
+      "items": {
+        "parentChild": "Parent-child data passing",
+        "childParent": "Child-parent event notification",
+        "sibling": "Sibling and cross-level communication"
+      },
+      "button": "Start Learning"
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "Advanced React design patterns and techniques",
+      "items": {
+        "hoc": "Higher-Order Components (HOC)",
+        "renderProps": "Render Props Pattern",
+        "composition": "Compound components and state management"
+      },
+      "button": "Start Learning"
+    },
+    "howToUse": {
+      "title": "How to Use This Site",
+      "step1": "Select a React topic from the left sidebar",
+      "step2": "Each page contains concept explanations, code examples, and practical applications",
+      "step3": "Review code examples to understand how React works",
+      "step4": "Follow the learning path from basics to advanced topics progressively"
+    }
+  },
+  "pages": {
+    "useState": {
+      "title": "useState Hook",
+      "whatIs": {
+        "title": "What is useState?",
+        "description": "useState is a built-in React Hook that allows you to add state to function components.",
+        "content": "In React, component state refers to data that changes over time and affects component rendering. The useState Hook is React's way of managing state in function components. It returns a state value and a function to update that state."
+      },
+      "syntax": {
+        "title": "Basic Syntax",
+        "description": "Learn how to declare and use state variables.",
+        "intro": "The basic syntax of useState Hook is as follows:",
+        "explanation": "Where:",
+        "state": "is the current state value",
+        "setState": "is the function to update the state",
+        "initialState": "is the initial value of the state",
+        "note": "The state update function (e.g., setName) can accept a new state value, or a function that receives the previous state value and returns the new state value."
+      },
+      "examples": {
+        "title": "Examples Using useState",
+        "description": "Several practical examples of using useState.",
+        "counter": "Counter",
+        "form": "Form",
+        "toggle": "Toggle"
+      },
+      "interactive": {
+        "title": "Interactive Examples",
+        "description": "Try interacting with the examples below."
+      },
+      "functionUpdate": {
+        "title": "Functional Updates",
+        "description": "Use functional updates when the new state depends on the old state.",
+        "content": "When you need to calculate new state based on current state, pass a function to the state setter:"
+      },
+      "objectState": {
+        "title": "Object State",
+        "description": "How to correctly update object state.",
+        "content": "When state is an object, use the spread operator to create a new object:"
+      },
+      "arrayState": {
+        "title": "Array State",
+        "description": "How to correctly update array state.",
+        "content": "Array state updates also require creating a new array:"
+      },
+      "rules": {
+        "title": "Rules of Use",
+        "description": "Important rules to follow when using useState.",
+        "rule1": {
+          "title": "Only Call at the Top Level",
+          "content": "Don't call useState inside loops, conditions, or nested functions."
+        },
+        "rule2": {
+          "title": "Only Call from React Functions",
+          "content": "Only call useState from React function components or custom Hooks."
+        },
+        "rule3": {
+          "title": "State Updates are Asynchronous",
+          "content": "After calling the state setter, the state doesn't change immediately. React batches updates for better performance."
+        },
+        "rule4": {
+          "title": "State Updates Trigger Re-renders",
+          "content": "Each call to the state setter causes the component to re-render (if the state value actually changed)."
+        }
+      },
+      "bestPractices": {
+        "title": "Best Practices",
+        "description": "Recommended practices for using useState.",
+        "practice1": {
+          "title": "Use Multiple State Variables",
+          "content": "Manage related but independent state separately instead of putting them in one large object."
+        },
+        "practice2": {
+          "title": "Avoid Unnecessary State",
+          "content": "If a value can be calculated from existing props or state, don't create separate state for it."
+        },
+        "practice3": {
+          "title": "Use Functional Updates",
+          "content": "When new state depends on old state, use functional updates to ensure correctness."
+        },
+        "practice4": {
+          "title": "Name State Variables Descriptively",
+          "content": "Use descriptive names like [isLoading, setIsLoading] instead of [flag, setFlag]."
+        }
+      },
+      "commonMistakes": {
+        "title": "Common Mistakes",
+        "description": "Common pitfalls to avoid when using useState.",
+        "mistake1": {
+          "title": "Directly Mutating State",
+          "content": "Never directly modify state objects or arrays; always create new copies."
+        },
+        "mistake2": {
+          "title": "Calling Setters During Render",
+          "content": "Don't call state setters directly in the component's render logic, as this causes infinite loops."
+        }
+      }
+    },
+    "useMemo": {
+      "title": "useMemo",
+      "whatIs": {
+        "title": "What is useMemo?",
+        "description": "useMemo is a React Hook that memoizes calculated values to avoid expensive computations on every render.",
+        "content": "useMemo accepts a create function and a dependency array, and only recalculates the value when dependencies change. This is particularly useful for performance optimization, especially when computations are expensive."
+      },
+      "syntax": {
+        "title": "Basic Syntax",
+        "description": "Learn how to use useMemo.",
+        "explanation": "Parameters:",
+        "param1": "Calculation function - returns the value you want to memoize",
+        "param2": "Dependency array - only recalculate when these values change"
+      },
+      "whenToUse": {
+        "title": "When to Use useMemo",
+        "description": "Scenarios where useMemo is appropriate.",
+        "scenario1": {
+          "title": "Expensive Calculations",
+          "content": "When you have computationally intensive operations in your component, useMemo can avoid repeated calculations on every render."
+        },
+        "scenario2": {
+          "title": "Referential Equality",
+          "content": "When you need to pass objects or arrays in dependency arrays, useMemo can maintain referential equality."
+        },
+        "scenario3": {
+          "title": "Optimize Child Component Rendering",
+          "content": "When used with React.memo, useMemo can prevent unnecessary child component re-renders."
+        }
+      },
+      "examples": {
+        "title": "Practical Examples",
+        "expensive": {
+          "title": "Expensive Calculation Example",
+          "subtitle": "Open console to see when calculation executes",
+          "count": "Count",
+          "result": "Calculated Result (count × 2)",
+          "increment": "Increment",
+          "toggleTheme": "Toggle Theme",
+          "note": "Note: Clicking 'Increment' triggers recalculation, but 'Toggle Theme' doesn't."
+        },
+        "reference": {
+          "title": "Referential Equality",
+          "name": "Name",
+          "age": "Age",
+          "namePlaceholder": "Enter name",
+          "rerender": "Force Re-render",
+          "withoutMemo": "Object reference changes without useMemo",
+          "withMemo": "Object reference changes with useMemo",
+          "note": "Note: Without useMemo, a new object is created on every render, even if values haven't changed."
+        }
+      },
+      "vsUseCallback": {
+        "title": "useMemo vs useCallback",
+        "description": "Understand the difference between useMemo and useCallback.",
+        "useMemo": "useMemo memoizes calculated results (values)",
+        "useCallback": "useCallback memoizes the function itself",
+        "equivalent": "They are equivalent:"
+      },
+      "bestPractices": {
+        "title": "Best Practices",
+        "description": "Recommendations for using useMemo.",
+        "practice1": {
+          "title": "Don't Overuse",
+          "content": "Not all values need useMemo. Only use it when calculations are truly expensive or referential equality matters."
+        },
+        "practice2": {
+          "title": "Set Dependencies Correctly",
+          "content": "Ensure the dependency array includes all values used in the calculation function."
+        },
+        "practice3": {
+          "title": "Measure Performance",
+          "content": "Measure performance before and after adding useMemo to ensure it actually provides improvement."
+        }
+      },
+      "commonMistakes": {
+        "title": "Common Mistakes",
+        "description": "Pitfalls to avoid when using useMemo.",
+        "mistake1": {
+          "title": "Premature Optimization",
+          "content": "Don't use useMemo where there's no performance problem; it makes code more complex."
+        },
+        "mistake2": {
+          "title": "Missing Dependencies",
+          "content": "Ensure all variables used in the calculation function are in the dependency array."
+        },
+        "mistake3": {
+          "title": "Empty Dependency Array",
+          "content": "If the dependency array is empty, the value is only calculated once, which may lead to stale values."
+        }
+      }
+    }
+  },
+  "metadata": {
+    "title": "React Learning Guide",
+    "description": "React learning resources from basics to advanced"
+  },
+  "common": {
+    "viewCode": "View Code",
+    "preview": "Preview",
+    "tryIt": "Try It",
+    "explanation": "Explanation",
+    "note": "Note",
+    "warning": "Warning",
+    "tip": "Tip",
+    "example": "Example",
+    "result": "Result",
+    "interactive": "Interactive Example"
+  }
+}

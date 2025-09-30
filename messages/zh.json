@@ -1,0 +1,304 @@
+{
+  "nav": {
+    "title": "React 学习导航",
+    "basics": {
+      "title": "React 基础",
+      "jsx": "JSX 语法",
+      "components": "组件基础",
+      "props": "Props 属性"
+    },
+    "state": {
+      "title": "状态管理",
+      "useState": "useState 钩子",
+      "useReducer": "useReducer 钩子",
+      "liftingState": "状态提升"
+    },
+    "communication": {
+      "title": "组件通信",
+      "parentToChild": "父传子 (Props)",
+      "childToParent": "子传父 (回调函数)",
+      "sibling": "兄弟组件通信",
+      "context": "跨层级通信 (Context)"
+    },
+    "effects": {
+      "title": "生命周期与副作用",
+      "useEffect": "useEffect 基础",
+      "dependencyArray": "依赖数组",
+      "cleanup": "清理副作用"
+    },
+    "hooks": {
+      "title": "Hooks 进阶",
+      "useMemo": "useMemo",
+      "useCallback": "useCallback",
+      "useRef": "useRef",
+      "customHooks": "自定义 Hooks"
+    },
+    "advanced": {
+      "title": "高级模式",
+      "hoc": "高阶组件 (HOC)",
+      "renderProps": "Render Props",
+      "compoundComponents": "组合组件",
+      "contextReducer": "Context + useReducer"
+    },
+    "performance": {
+      "title": "性能优化",
+      "memo": "React.memo",
+      "listOptimization": "列表优化",
+      "lazyLoading": "懒加载"
+    },
+    "examples": {
+      "title": "实战案例",
+      "todoApp": "待办事项应用",
+      "dataFetching": "数据获取与展示",
+      "forms": "表单处理",
+      "notes": "笔记应用"
+    }
+  },
+  "home": {
+    "title": "React 学习导航",
+    "subtitle": "从基础到高级的 React 学习资源，帮助你掌握 React 开发",
+    "basics": {
+      "title": "基础知识",
+      "description": "React 的核心概念和基础用法",
+      "items": {
+        "jsx": "JSX 语法与表达式",
+        "components": "组件的创建与使用",
+        "props": "Props 属性传递"
+      },
+      "button": "开始学习"
+    },
+    "communication": {
+      "title": "组件通信",
+      "description": "各种组件间数据传递的方式",
+      "items": {
+        "parentChild": "父子组件数据传递",
+        "childParent": "子父组件事件通知",
+        "sibling": "兄弟组件和跨层级通信"
+      },
+      "button": "开始学习"
+    },
+    "advanced": {
+      "title": "高级模式",
+      "description": "React 高级设计模式与技巧",
+      "items": {
+        "hoc": "高阶组件 (HOC)",
+        "renderProps": "Render Props 模式",
+        "composition": "组合组件与状态管理"
+      },
+      "button": "开始学习"
+    },
+    "howToUse": {
+      "title": "如何使用本站",
+      "step1": "从左侧导航栏选择你想学习的 React 主题",
+      "step2": "每个页面包含概念解释、代码示例和实际应用",
+      "step3": "查看代码示例，理解 React 的工作原理",
+      "step4": "按照学习路径从基础到高级逐步学习"
+    }
+  },
+  "pages": {
+    "useState": {
+      "title": "useState 钩子",
+      "whatIs": {
+        "title": "什么是 useState？",
+        "description": "useState 是 React 的一个内置钩子，它允许你在函数组件中添加状态。",
+        "content": "在 React 中，组件的状态是指随时间变化并且会影响组件渲染的数据。useState 钩子是 React 提供的一种在函数组件中管理状态的方法。它返回一个状态值和一个更新该状态的函数。"
+      },
+      "syntax": {
+        "title": "useState 基本语法",
+        "description": "了解如何声明和使用状态变量。",
+        "intro": "useState 钩子的基本语法如下：",
+        "explanation": "这里：",
+        "state": "是当前状态值",
+        "setState": "是更新状态的函数",
+        "initialState": "是状态的初始值",
+        "note": "状态更新函数（如 setName）可以接收新的状态值，也可以接收一个函数，该函数接收前一个状态值并返回新的状态值。"
+      },
+      "examples": {
+        "title": "使用 useState 的示例",
+        "description": "几个使用 useState 的实际例子。",
+        "counter": "计数器",
+        "form": "表单",
+        "toggle": "切换开关"
+      },
+      "interactive": {
+        "title": "交互式示例",
+        "description": "尝试与下面的示例互动。"
+      },
+      "functionUpdate": {
+        "title": "函数式更新",
+        "description": "当新状态依赖于旧状态时，使用函数式更新。",
+        "content": "当你需要基于当前状态计算新状态时，传递一个函数给状态更新函数："
+      },
+      "objectState": {
+        "title": "对象状态",
+        "description": "如何正确更新对象状态。",
+        "content": "当状态是对象时，需要使用展开运算符来创建新对象："
+      },
+      "arrayState": {
+        "title": "数组状态",
+        "description": "如何正确更新数组状态。",
+        "content": "数组状态的更新也需要创建新数组："
+      },
+      "rules": {
+        "title": "使用规则",
+        "description": "使用 useState 时需要注意的重要规则。",
+        "rule1": {
+          "title": "只在顶层调用",
+          "content": "不要在循环、条件或嵌套函数中调用 useState。"
+        },
+        "rule2": {
+          "title": "只在 React 函数中调用",
+          "content": "只在 React 函数组件或自定义 Hook 中调用 useState。"
+        },
+        "rule3": {
+          "title": "状态更新是异步的",
+          "content": "调用状态更新函数后，状态不会立即改变。React 会批量处理更新以提高性能。"
+        },
+        "rule4": {
+          "title": "状态更新会触发重新渲染",
+          "content": "每次调用状态更新函数都会导致组件重新渲染（如果状态值确实发生了变化）。"
+        }
+      },
+      "bestPractices": {
+        "title": "最佳实践",
+        "description": "使用 useState 的推荐做法。",
+        "practice1": {
+          "title": "使用多个状态变量",
+          "content": "将相关但独立的状态分开管理，而不是放在一个大对象中。"
+        },
+        "practice2": {
+          "title": "避免不必要的状态",
+          "content": "如果某个值可以从已有的 props 或 state 计算得出，就不要为它创建单独的状态。"
+        },
+        "practice3": {
+          "title": "使用函数式更新",
+          "content": "当新状态依赖于旧状态时，使用函数式更新以确保正确性。"
+        },
+        "practice4": {
+          "title": "合理命名状态变量",
+          "content": "使用描述性的名称，如 [isLoading, setIsLoading] 而不是 [flag, setFlag]。"
+        }
+      },
+      "commonMistakes": {
+        "title": "常见错误",
+        "description": "使用 useState 时要避免的常见陷阱。",
+        "mistake1": {
+          "title": "直接修改状态",
+          "content": "永远不要直接修改状态对象或数组，总是创建新的副本。"
+        },
+        "mistake2": {
+          "title": "在渲染期间调用更新函数",
+          "content": "不要在组件的渲染逻辑中直接调用状态更新函数，这会导致无限循环。"
+        }
+      }
+    },
+    "useMemo": {
+      "title": "useMemo",
+      "whatIs": {
+        "title": "什么是 useMemo？",
+        "description": "useMemo 是一个 React Hook，用于缓存计算结果，避免在每次渲染时重复进行昂贵的计算。",
+        "content": "useMemo 接收一个创建函数和一个依赖项数组，只有当依赖项发生变化时才会重新计算值。这对于优化性能特别有用，尤其是当计算成本很高时。"
+      },
+      "syntax": {
+        "title": "基本语法",
+        "description": "了解如何使用 useMemo。",
+        "explanation": "参数说明：",
+        "param1": "计算函数 - 返回你想缓存的值",
+        "param2": "依赖数组 - 只有这些值变化时才重新计算"
+      },
+      "whenToUse": {
+        "title": "何时使用 useMemo",
+        "description": "useMemo 适用的场景。",
+        "scenario1": {
+          "title": "昂贵的计算",
+          "content": "当组件中有计算密集型操作时，使用 useMemo 可以避免在每次渲染时重复计算。"
+        },
+        "scenario2": {
+          "title": "引用相等性",
+          "content": "当你需要在依赖数组中传递对象或数组时，使用 useMemo 可以保持引用相等性。"
+        },
+        "scenario3": {
+          "title": "优化子组件渲染",
+          "content": "与 React.memo 配合使用时，useMemo 可以防止不必要的子组件重新渲染。"
+        }
+      },
+      "examples": {
+        "title": "实际示例",
+        "expensive": {
+          "title": "昂贵计算示例",
+          "subtitle": "打开控制台查看计算何时执行",
+          "count": "计数",
+          "result": "计算结果 (count × 2)",
+          "increment": "增加计数",
+          "toggleTheme": "切换主题",
+          "note": "注意：点击\"增加计数\"会触发重新计算，而点击\"切换主题\"不会。"
+        },
+        "reference": {
+          "title": "引用相等性",
+          "name": "姓名",
+          "age": "年龄",
+          "namePlaceholder": "输入姓名",
+          "rerender": "强制重新渲染",
+          "withoutMemo": "不使用 useMemo 的对象引用变化",
+          "withMemo": "使用 useMemo 的对象引用变化",
+          "note": "注意：不使用 useMemo 时，每次渲染都会创建新对象，即使值没变。"
+        }
+      },
+      "vsUseCallback": {
+        "title": "useMemo vs useCallback",
+        "description": "理解 useMemo 和 useCallback 的区别。",
+        "useMemo": "useMemo 缓存计算结果（值）",
+        "useCallback": "useCallback 缓存函数本身",
+        "equivalent": "它们是等价的："
+      },
+      "bestPractices": {
+        "title": "最佳实践",
+        "description": "使用 useMemo 的建议。",
+        "practice1": {
+          "title": "不要过度使用",
+          "content": "不是所有值都需要 useMemo。只在计算确实昂贵或引用相等性很重要时使用。"
+        },
+        "practice2": {
+          "title": "正确设置依赖",
+          "content": "确保依赖数组包含所有在计算函数中使用的值。"
+        },
+        "practice3": {
+          "title": "性能测量",
+          "content": "在添加 useMemo 前后进行性能测量，确保它确实带来了改进。"
+        }
+      },
+      "commonMistakes": {
+        "title": "常见错误",
+        "description": "使用 useMemo 时要避免的陷阱。",
+        "mistake1": {
+          "title": "过早优化",
+          "content": "不要在没有性能问题的地方使用 useMemo，这会让代码更复杂。"
+        },
+        "mistake2": {
+          "title": "遗漏依赖项",
+          "content": "确保所有在计算函数中使用的变量都在依赖数组中。"
+        },
+        "mistake3": {
+          "title": "依赖数组为空",
+          "content": "如果依赖数组为空，值只会计算一次，可能导致使用过时的值。"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "title": "React 学习导航",
+    "description": "从基础到高级的 React 学习资源"
+  },
+  "common": {
+    "viewCode": "查看代码",
+    "preview": "预览",
+    "tryIt": "试试看",
+    "explanation": "说明",
+    "note": "注意",
+    "warning": "警告",
+    "tip": "提示",
+    "example": "示例",
+    "result": "结果",
+    "interactive": "交互式示例"
+  }
+}
