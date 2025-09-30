@@ -114,6 +114,7 @@ const initialSections: NavSection[] = [
       { title: "待办事项应用", href: "/examples/todo-app" },
       { title: "数据获取与展示", href: "/examples/data-fetching" },
       { title: "表单处理", href: "/examples/forms" },
+      { title: "笔记应用", href: "/examples/notes" },
     ],
   },
 ];
